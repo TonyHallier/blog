@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles de Blog</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; background-color: white; }
+        .article { margin-bottom: 20px; padding: 10px; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; }
+        a { text-decoration: none; color: #333; }
+        button { padding: 8px 16px; background-color: #ff6347; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #e53d32; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Articles du Blog</h1>
+        <a href="/new"><button>Créer un nouvel article</button></a>
+        <div>
+            <% articles.forEach(article => { %>
+                <div class="article">
+                    <h2><%= article.title %></h2>
+                    <p><%= article.content %></p>
+                    <p><strong>Publié le :</strong> <%= article.date.toDateString() %></p>
+                    <a href="/edit/<%= article._id %>"><button>Modifier</button></a>
+                    <form action="/delete/<%= article._id %>" method="POST" style="display:inline;">
+                        <button type="submit">Supprimer</button>
+                    </form>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>
